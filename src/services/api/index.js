@@ -3,32 +3,24 @@ const VERSION = process.env.NEXT_PUBLIC_API_VERSION;
 
 const endPoints = {
   auth: {
-    login: `${API}/${VERSION}/auth/login`,
-    profile: `${API}/${VERSION}/auth/profile`,
-  },
-  categories: {
-    list: `${API}/${VERSION}/categories`,
-    create: `${API}/${VERSION}/categories`,
-    get: (id) => `${API}/${VERSION}/categories/${id}`,
-    update: (id) => `${API}/${VERSION}/categories/${id}`,
-    categoryProducts: (id) => `${API}/${VERSION}/categories/${id}/products`,
-  },
-  files: {
-    upload: `${API}/${VERSION}/files/upload`,
-    get: (filename) => `${API}/${VERSION}/files/${filename}`,
+    login: `${API}/api/${VERSION}/auth/login`,
+    profile: `${API}/api/${VERSION}/auth/profile`,
   },
   products: {
-    list: `${API}/${VERSION}/products`,
-    paginate: (limit = 10, offset = 1) => `${API}/${VERSION}/products?limit=${limit}&offset=${offset}`,
-    get: (id) => `${API}/${VERSION}/products/${id}`,
-    create: `${API}/${VERSION}/products`,
-    update: (id) => `${API}/${VERSION}/products/${id}`,
-    delete: (id) => `${API}/${VERSION}/products/${id}`,
+    getProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
+    getProducts: (limit, offset) => `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
+    addProducts: `${API}/api/${VERSION}/products`,
+    updateProducts: (id) => `${API}/api/${VERSION}/products/${id}/`,
+    deleteProducts: (id) => `${API}/api/${VERSION}/products/${id}/`,
   },
-  users: {
-    list: `${API}/${VERSION}/users`,
-    create: `${API}/${VERSION}/users`,
-    isAvailable: `${API}/${VERSION}/users/is-available/`,
+  categories: {
+    getCategoriesList: `${API}/api/${VERSION}/categories/`,
+    addCategory: `${API}/api/${VERSION}/categories/`,
+    getCategoryItems: (id) => `${API}/api/${VERSION}/categories/${id}/products/`,
+    updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
+  },
+  files: {
+    addImage: `${API}/api/${VERSION}/files/upload/`,
   },
 };
 
