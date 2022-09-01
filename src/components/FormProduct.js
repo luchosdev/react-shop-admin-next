@@ -24,13 +24,34 @@ export default function FormProduct({ setOpen, setAlert, product }) {
     };
 
     if (product) {
-      const updateValidation = await ValidationSchema.validate(data)
+      ValidationSchema.validate(data)
         .then(() => {
           updateProduct(product.id, data).then(() => {
             router.push('/dashboard/products/');
             setAlert({
               active: true, //Se activa
               message: 'Product updated successfully',
+              type: 'success',
+              autoClose: false,
+            });
+            setOpen(false);
+          });
+        })
+        .catch(function (err) {
+          setAlert({
+            active: true,
+            message: err.message,
+            type: 'error',
+            autoClose: false,
+          });
+        });
+    } else {
+      ValidationSchema.validate(data)
+        .then(() => {
+          addProduct(data).then(() => {
+            setAlert({
+              active: true, //Se activa
+              message: 'Product added successfully',
               type: 'success',
               autoClose: false,
             });

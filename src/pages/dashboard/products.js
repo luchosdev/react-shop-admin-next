@@ -10,10 +10,6 @@ import Alert from '@common/Alert';
 import Image from 'next/image';
 import { deleteProduct } from '@services/api/products';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
