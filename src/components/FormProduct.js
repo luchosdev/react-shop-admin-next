@@ -29,7 +29,6 @@ export default function FormProduct({ setOpen, setAlert, product }) {
               type: 'success',
               autoClose: false,
             });
-            setOpen(false);
           });
         })
         .catch(function (err) {
