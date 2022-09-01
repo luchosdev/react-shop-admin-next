@@ -41,12 +41,8 @@ function useProvideAuth() {
     window.location.href = '/login';
   };
 
-  const [error, setError] = useState();
-
   return {
     user,
-    error,
-    setError,
     signIn,
     logout,
   };

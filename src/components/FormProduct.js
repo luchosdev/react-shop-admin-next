@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { addProduct, updateProduct } from '@services/api/products';
 import { ValidationSchema } from '@common/ValidationSchema';
@@ -6,6 +6,11 @@ import { ValidationSchema } from '@common/ValidationSchema';
 export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const categoryTag = document.querySelector('#category');
+    categoryTag.value = product?.categoryId;
+  }, [product]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,27 +22,30 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
-    const valid = await ValidationSchema.validate(data)
-      .then(() => {
-        addProduct(data).then(() => {
+
+    if (product) {
+      const updateValidation = await ValidationSchema.validate(data)
+        .then(() => {
+          updateProduct(product.id, data).then(() => {
+            router.push('/dashboard/products/');
+            setAlert({
+              active: true, //Se activa
+              message: 'Product updated successfully',
+              type: 'success',
+              autoClose: false,
+            });
+            setOpen(false);
+          });
+        })
+        .catch(function (err) {
           setAlert({
-            active: true, //Se activa
-            message: 'Product added successfully',
-            type: 'success',
+            active: true,
+            message: err.message,
+            type: 'error',
             autoClose: false,
           });
-          setOpen(false);
         });
-      })
-      .catch(function (err) {
-        console.log(err.message);
-        setAlert({
-          active: true,
-          message: err.message,
-          type: 'error',
-          autoClose: false,
-        });
-      });
+    }
   };
 
   return (
@@ -76,7 +84,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
               <select
                 id="category"
                 name="category"
-                defaultValue={product?.category}
+                defaultValue={product?.categoryId}
                 autoComplete="category-name"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >

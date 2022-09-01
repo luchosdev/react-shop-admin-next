@@ -1,10 +1,14 @@
 import FormProduct from '@components/FormProduct';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import endPoints from '@services/api';
+import Alert from '@common/Alert';
+import useAlert from '@hooks/useAlert';
 
 export default function Edit() {
+  const [open, setOpen] = useState(false);
+  const { alert, setAlert, toggleAlert } = useAlert();
   const [product, setProduct] = useState({});
   const router = useRouter();
 
@@ -15,8 +19,13 @@ export default function Edit() {
       const response = await axios.get(endPoints.products.getProduct(id));
       setProduct(response.data);
     }
-    getProduct();
+    getProduct().catch((error) => router.push('/notFound'));
   }, [router?.isReady]);
 
-  return <FormProduct product={product} />;
+  return (
+    <>
+      <Alert alert={alert} handleClose={toggleAlert} />
+      <FormProduct setOpen={setOpen} setAlert={setAlert} product={product} />
+    </>
+  );
 }
