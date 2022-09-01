@@ -3,6 +3,10 @@ import useFetch from '@hooks/useFetch';
 import { Chart } from '@common/Chart';
 import Pagination from '@common/Pagination';
 import { useState } from 'react';
+import { XCircleIcon } from '@heroicons/react/solid';
+import { deleteProduct } from '@services/api/products';
+import useAlert from '@hooks/useAlert';
+import Alert from '@common/Alert';
 
 const PRODUCT_LIMIT = 10;
 const PRODUCT_OFFSET = 0;
@@ -28,8 +32,22 @@ export default function Dashboard() {
     ],
   };
 
+  const { alert, setAlert, toggleAlert } = useAlert();
+
+  const handleDelete = (id) => {
+    deleteProduct(id).then(() => {
+      setAlert({
+        active: true,
+        message: 'Delete product successfully',
+        type: 'error',
+        autoClose: true,
+      });
+    });
+  };
+
   return (
     <>
+      <Alert alert={alert} handleClose={toggleAlert} />
       <Chart className="mb-8 mt-2" chartData={data} />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -94,14 +112,19 @@ export default function Dashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
+                        <a
+                          href={`/dashboard/edit/${product.id}`}
+                          className="text-indigo-600 hover:text-indigo-900"
+                        >
                           Edit
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                        <XCircleIcon
+                          className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer"
+                          aria-hidden="true"
+                          onClick={() => handleDelete(product.id)}
+                        />
                       </td>
                     </tr>
                   ))}
