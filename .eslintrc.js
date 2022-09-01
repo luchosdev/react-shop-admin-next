@@ -14,15 +14,5 @@ module.exports = {
   ],
   rules: {
     semi: ['error', 'always'],
-    'jsx-a11y/label-has-associated-control': [
-      2,
-      {
-        labelComponents: ['CustomLabel'],
-        labelAttributes: ['inputLabel'],
-        controlComponents: ['CustomInput'],
-        assert: 'both',
-        depth: 3,
-      },
-    ],
   },
 };

@@ -5,7 +5,6 @@ import {
   ChevronDoubleRightIcon,
 } from '@heroicons/react/solid';
 import { useState } from 'react';
-import Link from 'next/link';
 
 export default function Pagination({ setOffset, productNumberLimit, totalItems }) {
   const pivot = 3;
@@ -17,7 +16,7 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
 
   for (let i = initial; i < final; i++) {
     itemsArray.push(
-      <Link
+      <a
         key={`Page-${i}`}
         onClick={() => {
           setCurrent(i);
@@ -29,7 +28,7 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
                     relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
       >
         {i}
-      </Link>
+      </a>
     );
   }
 
@@ -84,7 +83,7 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
         </div>
         <div>
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-            <Link
+            <a
               onClick={startButton}
               href="#"
               className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50
@@ -93,8 +92,8 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
             >
               <span className="sr-only">Start</span>
               <ChevronDoubleLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
-            <Link
+            </a>
+            <a
               onClick={prevButton}
               href="#"
               className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50
@@ -103,9 +102,9 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
+            </a>
             {itemsArray}
-            <Link
+            <a
               onClick={nextButton}
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-r-md
@@ -113,8 +112,8 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
-            <Link
+            </a>
+            <a
               onClick={endButton}
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-r-md
@@ -122,7 +121,7 @@ export default function Pagination({ setOffset, productNumberLimit, totalItems }
             >
               <span className="sr-only">End</span>
               <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
+            </a>
           </nav>
         </div>
       </div>

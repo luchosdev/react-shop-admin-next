@@ -2,8 +2,6 @@ import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useAuth } from '@hooks/useAuth';
-import Image from 'next/image';
-import Link from 'next/link';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
@@ -33,7 +31,7 @@ export default function LoginPage() {
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <Image
+            <img
               className="mx-auto h-12 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
               alt="Workflow"
@@ -91,9 +89,9 @@ export default function LoginPage() {
               </div>
 
               <div className="text-sm">
-                <Link href="/reset" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href="/reset" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
-                </Link>
+                </a>
               </div>
             </div>
 

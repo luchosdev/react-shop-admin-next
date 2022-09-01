@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { PlusIcon, XCircleIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
-import Image from 'next/image';
 import { deleteProduct } from '@services/api/products';
 
 export default function Products() {
@@ -107,13 +105,10 @@ export default function Products() {
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
                             {product.images[0] && (
-                              <Image
+                              <img
                                 className="h-10 w-10 rounded-full"
                                 loader={() => product.images[0]}
                                 src={product.images[0]}
-                                layout="fixed"
-                                width="40"
-                                height="40"
                                 alt=""
                               />
                             )}
@@ -134,12 +129,12 @@ export default function Products() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link
+                        <a
                           href={`/dashboard/edit/${product.id}`}
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit
-                        </Link>
+                        </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <XCircleIcon

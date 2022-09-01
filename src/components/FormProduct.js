@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { addProduct, updateProduct } from '@services/api/products';
 import { ValidationSchema } from '@common/ValidationSchema';
@@ -7,12 +7,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const categoryTag = document.querySelector('#category');
-    categoryTag.value = product?.categoryId;
-  }, [product]);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
     const data = {
