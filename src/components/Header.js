@@ -7,7 +7,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard/', current: true },
   { name: 'Products', href: '/dashboard/products/', current: false },
-  { name: 'GitHub', href: '#https://github.com/LuisSequeraDev/react-shop-admin-next', current: false },
+  { name: 'GitHub', href: 'https://github.com/LuisSequeraDev/react-shop-admin-next', current: false },
 ];
 
 const userNavigation = [
