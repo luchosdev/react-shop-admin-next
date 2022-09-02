@@ -12,7 +12,7 @@ const navigation = [
 export default function Home() {
   return (
     <head>
-      <title>"Products Lists"</title>
+      <title>Products Lists</title>
     </head>
     <div className="relative bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
